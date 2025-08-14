@@ -47,3 +47,117 @@ This work demonstrates skills in **data preprocessing**, **EDA**, **model buildi
 
 ## 📂 Project Structure
 
+PREDICTING_SPOTIFY_SONG_POPULARITY/
+├── dataset/ SpotifyFeatures.csv
+├── notebooks/
+│ ├── 01_eda.ipynb # Data cleaning & exploratory analysis
+│ └── 02_model_pytorch.ipynb # Model building & evaluation
+├── artifacts/ # Saved models, scalers, configs
+├── src/
+│ ├── data_utils.py # Data loading, cleaning, splitting
+│ ├── model.py # PyTorch model definitions
+│ ├── train.py # Training & evaluation loops
+├── requirements.txt # Dependencies
+├── README.md # Project documentation
+
+---
+
+## 📊 Dataset
+
+**Source:** [Ultimate Spotify Tracks DB — Kaggle](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db)  
+**Rows:** ~232k  
+**Columns:** Audio features, track metadata, and popularity score.
+
+**Features used for prediction:**
+
+- `danceability`
+- `energy`
+- `acousticness`
+- `instrumentalness`
+- `liveness`
+- `loudness`
+- `speechiness`
+- `tempo`
+- `valence`
+- `duration_min`
+
+**Target:**
+
+- `popularity` (integer, 0–100)
+
+---
+
+## 📈 Workflow
+
+1. **Data Preparation**
+
+   - Load CSV data into Pandas
+   - Drop unnecessary ID and categorical columns (e.g., artist name, track ID)
+   - Convert `duration_ms` to minutes
+   - Handle outliers and scale numeric features
+
+2. **EDA**
+
+   - Distribution of popularity
+   - Correlation heatmap
+   - Popularity by genre
+   - Feature distributions by popularity tier
+
+3. **Modeling**
+
+   - PyTorch MLP with multiple hidden layers
+   - Train with MSE loss
+   - Evaluate using RMSE & MAE
+   - Early stopping to avoid overfitting
+
+4. **Evaluation**
+
+   - Test set performance
+   - Predicted vs Actual plot
+   - Residuals analysis
+   - Feature importance and sensitivity
+
+5. **Prediction Function**
+   - Pass new song feature values to get a popularity prediction
+   - Local explanation for prediction
+
+---
+
+## 📊 Example Results
+
+| Metric | Validation | Test   |
+| ------ | ---------- | ------ |
+| RMSE   | XX.XXX     | XX.XXX |
+| MAE    | XX.XXX     | XX.XXX |
+
+_(Exact numbers depend on final tuned model.)_
+
+---
+
+## ⚙️ Installation & Usage
+
+1. **Clone the repository**
+
+````bash
+git clone https://github.com/yourusername/spotify-popularity.git
+cd spotify-popularity
+
+2. **Install the dependencies**
+```bash
+pip install -r requirements.txt
+
+3. ** Run Notebooks**
+jupyter notebook notebook.ipynb
+
+📝 Notes
+
+Popularity is influenced by non-audio factors (artist fame, release timing).
+
+Predictions are based solely on audio features.
+
+Model performance can be improved with additional metadata (e.g., artist popularity, playlist count).
+
+
+
+
+````
