@@ -47,20 +47,24 @@ This work demonstrates skills in **data preprocessing**, **EDA**, **model buildi
 
 ## 📂 Project Structure
 
+```plaintext
 PREDICTING_SPOTIFY_SONG_POPULARITY/
-├── dataset/ SpotifyFeatures.csv
+├── dataset/
+│   └── SpotifyFeatures.csv
 ├── notebooks/
-│ ├── 01_eda.ipynb # Data cleaning & exploratory analysis
-│ └── 02_model_pytorch.ipynb # Model building & evaluation
-├── artifacts/ # Saved models, scalers, configs
+│   ├── 01_eda.ipynb             # Data cleaning & exploratory analysis
+│   └── 02_model_pytorch.ipynb   # Model building & evaluation
+├── artifacts/                   # Saved models, scalers, configs
 ├── src/
-│ ├── data_utils.py # Data loading, cleaning, splitting
-│ ├── model.py # PyTorch model definitions
-│ ├── train.py # Training & evaluation loops
-├── requirements.txt # Dependencies
-├── README.md # Project documentation
+│   ├── data_utils.py            # Data loading, cleaning, splitting
+│   ├── model.py                 # PyTorch model definitions
+│   ├── train.py                 # Training & evaluation loops
+├── requirements.txt             # Dependencies
+├── README.md                    # Project documentation
 
+```
 ---
+
 
 ## 📊 Dataset
 
@@ -130,24 +134,29 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 | RMSE   | XX.XXX     | XX.XXX |
 | MAE    | XX.XXX     | XX.XXX |
 
-_(Exact numbers depend on final tuned model.)_
+_(Exact numbers depend on final tuned model.)
 
----
+
 
 ## ⚙️ Installation & Usage
 
 1. **Clone the repository**
-
-````bash
-git clone https://github.com/yourusername/spotify-popularity.git
-cd spotify-popularity
+    ```bash
+    git clone https://github.com/yourusername/spotify-popularity.git
+    cd spotify-popularity
+    ```
 
 2. **Install the dependencies**
-```bash
-pip install -r requirements.txt
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-3. ** Run Notebooks**
-jupyter notebook notebook.ipynb
+3. **Run Notebooks**
+    ```bash
+    jupyter notebook notebook.ipynb
+    ```
+
+---
 
 📝 Notes
 
