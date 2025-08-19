@@ -11,3 +11,6 @@ venv/
 
 # Data files
 datasets/
+
+# keys
+secrets.txt
