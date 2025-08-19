@@ -13,7 +13,7 @@ The aim of this project is to:
 - Explore patterns between audio features and song popularity
 - Build a **PyTorch regression model** (MLP) to predict popularity
 - Experiment with neural network architectures and hyperparameters
-- Evaluate model performance with **RMSE** and **MAE**
+- Evaluate model performance with **RMSE**
 - Provide a helper function for predicting new songs
 
 This work demonstrates end-to-end skills in **data preprocessing**, **EDA**, **model building**, and **machine learning evaluation**.
@@ -114,10 +114,10 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 
 | Metric | Validation | Test   |
 | ------ | ---------- | ------ |
-| RMSE   | ~12.5      | ~12.9  |
-| MAE    | ~9.8       | ~10.1  |
+| RMSE   | ~14.4      | ~14.5  |
+| ------ |----------- | ------ |
 
-_(Exact values may vary slightly with random seeds and tuning.)_
+
 
 ---
 
@@ -138,7 +138,7 @@ pip install -r requirements.txt
 ## ▶️ Run Jupyter Notebook
 
 ```bash
-jupyter notebook notebooks/02_model_pytorch.ipynb
+jupyter notebook final.ipynb
 ````
 
 ## 📝 Notes
