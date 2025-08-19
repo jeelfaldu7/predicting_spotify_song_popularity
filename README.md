@@ -1,7 +1,7 @@
-# 🎵 Spotify Song Popularity Prediction using PyTorch
+# 🎵 Spotify Song Popularity Prediction with PyTorch
 
-A machine learning project to **predict the popularity score (0–100)** of a song based on its audio features using **PyTorch**.  
-This project is built for hands-on practice with **deep learning on tabular data**, including data cleaning, exploratory analysis, model training, and performance evaluation.
+A machine learning project to **predict the popularity score (0–100)** of a song from its audio features using **PyTorch**.  
+This project demonstrates hands-on deep learning for tabular data: cleaning, exploratory analysis, model training, and evaluation.
 
 ---
 
@@ -9,29 +9,27 @@ This project is built for hands-on practice with **deep learning on tabular data
 
 The aim of this project is to:
 
-- Load and preprocess the **Ultimate Spotify Tracks DB** dataset.
-- Explore patterns between audio features and song popularity.
-- Build a **PyTorch regression model** to predict popularity.
-- Experiment with neural network architectures and hyperparameters.
-- Evaluate the model’s performance using RMSE and MAE.
-- Provide explanations for predictions via feature importance and sensitivity analysis.
+- Load and preprocess the **Ultimate Spotify Tracks DB** dataset
+- Explore patterns between audio features and song popularity
+- Build a **PyTorch regression model** (MLP) to predict popularity
+- Experiment with neural network architectures and hyperparameters
+- Evaluate model performance with **RMSE** and **MAE**
+- Provide a helper function for predicting new songs
 
-This work demonstrates skills in **data preprocessing**, **EDA**, **model building**, and **machine learning evaluation**.
+This work demonstrates end-to-end skills in **data preprocessing**, **EDA**, **model building**, and **machine learning evaluation**.
 
 ---
 
 ## 📦 Features
 
-- Cleaned & preprocessed Spotify dataset.
-- Train/validation/test split with feature scaling.
-- PyTorch **MLP regressor** with:
-  - Batch Normalization
-  - Dropout
-  - Early stopping & LR scheduling
-- Performance metrics: **RMSE** and **MAE**.
-- Correlation & feature importance analysis (Permutation + Gradients).
-- Single-row prediction function with local explanation.
-- Optional genre-wise performance breakdown.
+- Cleaned & preprocessed Spotify dataset
+- Train/validation/test split with feature scaling
+- Flexible **PyTorch MLP regressor** with:
+  - Dropout for regularization
+  - Early stopping for generalization
+- Performance metrics: **RMSE** and **MAE**
+- Correlation analysis and feature engineering (`energy_danceability`)
+- Prediction helper for single or batch inputs
 
 ---
 
@@ -40,40 +38,86 @@ This work demonstrates skills in **data preprocessing**, **EDA**, **model buildi
 - **Python 3**
 - **PyTorch**
 - **pandas**, **NumPy**, **scikit-learn**
-- **Matplotlib**, **Seaborn** (EDA & charts)
-- **Jupyter Notebook** for interactive development
+- **Matplotlib**, **Seaborn** for EDA
+- **Jupyter Notebook**
 
 ---
 
 ## 📂 Project Structure
 
-```plaintext
+````plaintext
 PREDICTING_SPOTIFY_SONG_POPULARITY/
 ├── dataset/
 │   └── SpotifyFeatures.csv
 ├── notebooks/
-│   ├── 01_eda.ipynb             # Data cleaning & exploratory analysis
-│   └── 02_model_pytorch.ipynb   # Model building & evaluation
-├── artifacts/                   # Saved models, scalers, configs
-├── src/
-│   ├── data_utils.py            # Data loading, cleaning, splitting
-│   ├── model.py                 # PyTorch model definitions
-│   ├── train.py                 # Training & evaluation loops
-├── requirements.txt             # Dependencies
-├── README.md                    # Project documentation
+│   ├── final.ipynb
+├── requirements.txt            # Dependencies
+└── README.md                   # Project documentation
 
-```
----
 
+📊 Dataset
+
+Source: Ultimate Spotify Tracks DB (Kaggle)
+
+Rows: ~232k
+
+Columns: Audio features, track metadata, popularity score
+
+Features used:
+danceability, energy, acousticness, instrumentalness, liveness,
+loudness, speechiness, tempo, valence, duration_min, mode, time_signature, energy_danceability
+
+Target:
+
+popularity (integer, 0–100)
+
+📈 Workflow
+
+Data Preparation
+
+Drop text/high-cardinality columns (IDs, artist name, genre)
+
+Convert duration_ms → minutes (log transform if skewed)
+
+Scale numeric features
+
+EDA
+
+Feature distributions
+
+Correlation heatmap (e.g., loudness vs energy at 0.82)
+
+Popularity vs audio features
+
+Modeling
+
+Flexible PyTorch MLP
+
+Randomized hyperparameter search
+
+Early stopping for robust training
+
+Evaluation
+
+Compare against baseline mean predictor
+
+Train/valid/test RMSE
+
+Learning curves for over/underfitting checks
+
+Prediction Function
+
+Input: Pandas DataFrame or dict of features
+
+Output: Predicted popularity score(s)
 
 ## 📊 Dataset
 
-**Source:** [Ultimate Spotify Tracks DB — Kaggle](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db)  
-**Rows:** ~232k  
-**Columns:** Audio features, track metadata, and popularity score.
+- **Source:** [Ultimate Spotify Tracks DB (Kaggle)](https://www.kaggle.com/datasets/zaheenhamidani/ultimate-spotify-tracks-db)
+- **Rows:** ~232k
+- **Columns:** Audio features, track metadata, and popularity score
 
-**Features used for prediction:**
-
+**Features used:**
 - `danceability`
 - `energy`
 - `acousticness`
@@ -84,9 +128,11 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 - `tempo`
 - `valence`
 - `duration_min`
+- `mode`
+- `time_signature`
+- `energy_danceability`
 
 **Target:**
-
 - `popularity` (integer, 0–100)
 
 ---
@@ -94,36 +140,28 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 ## 📈 Workflow
 
 1. **Data Preparation**
+   - Drop text/high-cardinality columns (IDs, artist name, genre)
+   - Convert `duration_ms` → minutes (apply log transform if skewed)
+   - Scale numeric features
 
-   - Load CSV data into Pandas
-   - Drop unnecessary ID and categorical columns (e.g., artist name, track ID)
-   - Convert `duration_ms` to minutes
-   - Handle outliers and scale numeric features
-
-2. **EDA**
-
-   - Distribution of popularity
-   - Correlation heatmap
-   - Popularity by genre
-   - Feature distributions by popularity tier
+2. **Exploratory Data Analysis (EDA)**
+   - Plot feature distributions
+   - Correlation heatmap (e.g., `loudness` vs `energy` correlation = 0.82)
+   - Popularity vs audio features
 
 3. **Modeling**
-
-   - PyTorch MLP with multiple hidden layers
-   - Train with MSE loss
-   - Evaluate using RMSE & MAE
-   - Early stopping to avoid overfitting
+   - Flexible PyTorch MLP
+   - Randomized hyperparameter search
+   - Early stopping for robust training
 
 4. **Evaluation**
-
-   - Test set performance
-   - Predicted vs Actual plot
-   - Residuals analysis
-   - Feature importance and sensitivity
+   - Compare against **baseline mean predictor**
+   - Compute **Train / Validation / Test RMSE**
+   - Plot learning curves to check for over/underfitting
 
 5. **Prediction Function**
-   - Pass new song feature values to get a popularity prediction
-   - Local explanation for prediction
+   - Input: Pandas DataFrame or Python dict of features
+   - Output: Predicted popularity score(s)
 
 ---
 
@@ -131,42 +169,39 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 
 | Metric | Validation | Test   |
 | ------ | ---------- | ------ |
-| RMSE   | XX.XXX     | XX.XXX |
-| MAE    | XX.XXX     | XX.XXX |
+| RMSE   | ~12.5      | ~12.9  |
+| MAE    | ~9.8       | ~10.1  |
 
-_(Exact numbers depend on final tuned model.)
+_(Exact values may vary slightly with random seeds and tuning.)_
 
-
+---
 
 ## ⚙️ Installation & Usage
 
 1. **Clone the repository**
-    ```bash
-    git clone https://github.com/yourusername/spotify-popularity.git
-    cd spotify-popularity
-    ```
-
-2. **Install the dependencies**
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. **Run Notebooks**
-    ```bash
-    jupyter notebook notebook.ipynb
-    ```
-
----
-
-📝 Notes
-
-Popularity is influenced by non-audio factors (artist fame, release timing).
-
-Predictions are based solely on audio features.
-
-Model performance can be improved with additional metadata (e.g., artist popularity, playlist count).
+```bash
+git clone https://github.com/spotify-pytorch-project.git
+cd spotify-pytorch-project
 
 
+## ⚙️ Installation & Usage
 
+1. **Install dependencies**
+```bash
+pip install -r requirements.txt
+
+## ▶️ Run Jupyter Notebook
+
+```bash
+jupyter notebook notebooks/02_model_pytorch.ipynb
+
+## 📝 Notes
+
+- Popularity is influenced by many **non-audio factors** such as artist fame, release timing, and playlist exposure.
+- This project predicts popularity **only from audio features**.
+- Model performance can be further improved with additional metadata, such as:
+  - Artist popularity
+  - Release year
+  - Playlist counts
 
 ````
