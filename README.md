@@ -54,62 +54,7 @@ PREDICTING_SPOTIFY_SONG_POPULARITY/
 ├── requirements.txt            # Dependencies
 └── README.md                   # Project documentation
 
-
-📊 Dataset
-
-Source: Ultimate Spotify Tracks DB (Kaggle)
-
-Rows: ~232k
-
-Columns: Audio features, track metadata, popularity score
-
-Features used:
-danceability, energy, acousticness, instrumentalness, liveness,
-loudness, speechiness, tempo, valence, duration_min, mode, time_signature, energy_danceability
-
-Target:
-
-popularity (integer, 0–100)
-
-📈 Workflow
-
-Data Preparation
-
-Drop text/high-cardinality columns (IDs, artist name, genre)
-
-Convert duration_ms → minutes (log transform if skewed)
-
-Scale numeric features
-
-EDA
-
-Feature distributions
-
-Correlation heatmap (e.g., loudness vs energy at 0.82)
-
-Popularity vs audio features
-
-Modeling
-
-Flexible PyTorch MLP
-
-Randomized hyperparameter search
-
-Early stopping for robust training
-
-Evaluation
-
-Compare against baseline mean predictor
-
-Train/valid/test RMSE
-
-Learning curves for over/underfitting checks
-
-Prediction Function
-
-Input: Pandas DataFrame or dict of features
-
-Output: Predicted popularity score(s)
+````
 
 ## 📊 Dataset
 
@@ -182,18 +127,19 @@ _(Exact values may vary slightly with random seeds and tuning.)_
 ```bash
 git clone https://github.com/spotify-pytorch-project.git
 cd spotify-pytorch-project
-
+````
 
 ## ⚙️ Installation & Usage
 
-1. **Install dependencies**
+2. **Install dependencies**
 ```bash
 pip install -r requirements.txt
-
+````
 ## ▶️ Run Jupyter Notebook
 
 ```bash
 jupyter notebook notebooks/02_model_pytorch.ipynb
+````
 
 ## 📝 Notes
 
@@ -204,4 +150,12 @@ jupyter notebook notebooks/02_model_pytorch.ipynb
   - Release year
   - Playlist counts
 
-````
+---
+
+## 👥 Project Team  
+
+This project was developed by:  
+- **Ashok**  
+- **Priti**  
+- **Jeel**  
+
